@@ -35,7 +35,7 @@ t_dir	*init_dir(char *name, char *path_name)
 
 	if (!(dir = malloc(sizeof(t_dir))))
 		return (NULL);
-	dir->disp_name = 0;
+	dir->disp_name = 1;
 	dir->disp_total = 0;
 	dir->total = 0;
 	dir->maxlk = 0;
@@ -44,7 +44,9 @@ t_dir	*init_dir(char *name, char *path_name)
 	dir->maxfsz = 0;
 	dir->maxmin = 0;
 	dir->name = ft_strdup(name);
-	dir->path_name = ft_strdup(path_name);
+	dir->path_name = NULL;
+	if (path_name)
+		dir->path_name = ft_strdup(path_name);
 	dir->strerr = NULL;
 	dir->files = NULL;
 	dir->sdir = NULL;

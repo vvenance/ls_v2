@@ -25,6 +25,7 @@
 # include <stdlib.h>
 # include <errno.h>
 # include <string.h>
+# include <stdarg.h>
 # include "./libft/inc/libft.h"
 
 typedef struct	s_opt
@@ -62,7 +63,7 @@ typedef struct		s_dir
 
 typedef struct s_base
 {
-	t_dir		*errors;
+	t_dir		*error;
 	t_dir		*solo_files;
 	t_dir		*dir;
 }				t_base;
@@ -72,5 +73,12 @@ t_dir	*init_dir(char *name, char *path_name);
 t_base	*init_base(void);
 t_opt	*get_opt(t_opt *opt, char **av, int ac, int i);
 void	fts_open(int argc, char **argv);
+//void	ft_free(int nb, ...);
+void	ft_free(void *p1, void *p2, void *p3, void *p4);
+t_base	*get_args(t_opt *opt, char **av, int ac, t_base *base);
+void	*ft_stat_dup(void *s, size_t size);
+char	*can_be_opened(char *name);
+t_dir	*add_dir(char *avi, t_opt *opt, t_dir *dir, struct stat *stat);
+t_dir	*add_file(char *avi, t_opt *opt, t_dir *dir, struct stat *stat);
 
 #endif

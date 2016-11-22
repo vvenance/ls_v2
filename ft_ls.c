@@ -22,7 +22,7 @@ int	main(int ac, char **av)
 	if (!(opt = get_opt(opt, av, ac, 1)))
 		return (0);
 	fts_open(ac, av);
-	free((void *)(opt));
-	free((void *)(base));
-	return (1);
+	base = get_args(opt, av, ac, base);
+	ft_free(opt, base, NULL, NULL);
+	return (0);
 }
