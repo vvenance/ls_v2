@@ -29,14 +29,14 @@
 
 typedef struct	s_opt
 {
-	int	l;
-	int	br;
-	int	a;
-	int	r;
-	int	t;
-	int	n;
-	int	o;
-	int	index;
+	int			l;
+	int			br;
+	int			a;
+	int			r;
+	int			t;
+	int			n;
+	int			o;
+	int			index;
 }				t_opt;
 
 typedef struct		s_dir
@@ -62,9 +62,14 @@ typedef struct		s_dir
 
 typedef struct s_base
 {
-	t_dir	*errors;
-	t_dir	*solo_files;
-	t_dir	*dir;
+	t_dir		*errors;
+	t_dir		*solo_files;
+	t_dir		*dir;
 }				t_base;
+
+t_opt	*init_opt(void);
+t_dir	*init_dir(char *name, char *path_name);
+t_base	*init_base(void);
+t_opt	*get_opt(t_opt *opt, char **av, int ac, int i);
 
 #endif
