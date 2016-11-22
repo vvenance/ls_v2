@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvenance <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/22 10:54:50 by vvenance          #+#    #+#             */
-/*   Updated: 2016/11/22 10:54:52 by vvenance         ###   ########.fr       */
+/*   Created: 2016/11/22 11:37:00 by vvenance          #+#    #+#             */
+/*   Updated: 2016/11/22 11:37:01 by vvenance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int	main(int ac, char **av)
+void	fts_open(int argc, char **argv)
 {
-	t_base	*base;
-	t_opt	*opt;
+	int i;
 
-	opt = init_opt();
-	base = init_base();
-	if (!(opt = get_opt(opt, av, ac, 1)))
-		return (0);
-	fts_open(ac, av);
-	free((void *)(opt));
-	free((void *)(base));
-	return (1);
+	i = 0;
+	while (++i != argc)
+	{
+		if (!ft_strcmp(argv[i], ""))
+		{
+			ft_putstr_fd("ls: fts_open: No such file or directory\n", 2);
+			exit(1);
+		}
+	}
 }

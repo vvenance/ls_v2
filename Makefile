@@ -13,7 +13,7 @@
 
 CC_FLAGS     = -Wall -Wextra -Werror
 
-SRCS		= ft_ls.c init.c get_opt.c
+SRCS		= ft_ls.c init.c get_opt.c utils.c
 
 SRCS_O		= $(SRCS:.c=.o)
 

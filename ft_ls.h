@@ -71,5 +71,6 @@ t_opt	*init_opt(void);
 t_dir	*init_dir(char *name, char *path_name);
 t_base	*init_base(void);
 t_opt	*get_opt(t_opt *opt, char **av, int ac, int i);
+void	fts_open(int argc, char **argv);
 
 #endif
