@@ -34,20 +34,19 @@ static t_base	*ft_add_err(t_base *base, char *avi, char *strerr)
 
 static t_base	*get_args2(t_opt *opt, char *avi, t_base *base)
 {
-	struct stat	stat;
+	struct stat	statt;
 	char		*strerr;
 
-	err = NULL;
-	if (lstat(avi, &stat) != -1)
+	if (lstat(avi, &statt) != -1)
 	{
-		if (S_ISLNK(stat.st_mode))
-			stat(avi, &stat);
-		if (S_ISDIR(stat.st_mode) && !(strerr = (can_be_opened(avi))))
-			base->dir = add_dir(avi, opt, base->dir, &stat);
-		else if (S_ISREG(stat.st_mode) || S_ISCHR(stat.st_mode) ||
-			S_ISBLK(stat.st_mode) || S_ISFIFO(stat.st_mode) ||
-			S_ISLNK(stat.st_mode) || S_ISSOCK(stat.st_mode))
-			base->solo_files->files = add_file(avi, opt, base->solo_files, &stat);
+		if (S_ISLNK(statt.st_mode))
+			stat(avi, &statt);
+		if (S_ISDIR(statt.st_mode) && !(strerr = (can_be_opened(avi))))
+			base->dir = add_dir(avi, opt, base->dir, &statt);
+		else if (S_ISREG(statt.st_mode) || S_ISCHR(statt.st_mode) ||
+			S_ISBLK(statt.st_mode) || S_ISFIFO(statt.st_mode) ||
+			S_ISLNK(statt.st_mode) || S_ISSOCK(statt.st_mode))
+			base->solo_files->files = add_file(avi, opt, base->solo_files, &statt);
 		else
 			base = ft_add_err(base, avi, strerr);
 	}
@@ -60,13 +59,13 @@ t_base		*get_args(t_opt *opt, char **av, int ac, t_base *base)
 {
 	if (ac == opt->index && av)
 	{
-		base = get_args2(opt, ".", p);
+		base = get_args2(opt, ".", base);
 		if (base->dir)
 			base->dir->disp_name = 0;
 	}
 	if (opt->index + 1 == ac)
 	{
-		base = get_args2(opt, av[opt->index], p);
+		base = get_args2(opt, av[opt->index], base);
 		if (base->dir)
 			base->dir->disp_name = 0;
 	}

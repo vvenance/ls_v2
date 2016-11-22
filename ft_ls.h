@@ -27,6 +27,8 @@
 # include <string.h>
 # include <stdarg.h>
 # include "./libft/inc/libft.h"
+# define NSEC st_mtimespec.tv_nsec
+# define SEC st_mtimespec.tv_sec
 
 typedef struct	s_opt
 {
@@ -74,11 +76,18 @@ t_base	*init_base(void);
 t_opt	*get_opt(t_opt *opt, char **av, int ac, int i);
 void	fts_open(int argc, char **argv);
 //void	ft_free(int nb, ...);
-void	ft_free(void *p1, void *p2, void *p3, void *p4);
+void	ft_free(void **p1, void **p2, void **p3, void **p4);
 t_base	*get_args(t_opt *opt, char **av, int ac, t_base *base);
 void	*ft_stat_dup(void *s, size_t size);
 char	*can_be_opened(char *name);
 t_dir	*add_dir(char *avi, t_opt *opt, t_dir *dir, struct stat *stat);
 t_dir	*add_file(char *avi, t_opt *opt, t_dir *dir, struct stat *stat);
+t_dir	*reverse_sort_t(t_dir *tmp, t_dir *f);
+t_dir	*sort_t(t_dir *tmp, t_dir *f, int r);
+t_dir	*reverse_sort_a(t_dir *tmp, t_dir *f);
+t_dir	*sort_a(t_dir *tmp, t_dir *f, int r);
+
+
+
 
 #endif

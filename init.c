@@ -63,7 +63,7 @@ t_base	*init_base(void)
 
 	if (!(base = malloc(sizeof(t_base))))
 		return (NULL);
-	base->errors = NULL;
+	base->error = NULL;
 	base->solo_files = NULL;
 	base->dir = NULL;
 	return (base);

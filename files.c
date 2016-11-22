@@ -12,21 +12,21 @@
 
 #include "ft_ls.h"
 
-static void	get_info(t_dir *dir, t_opt *opt, t_dir *new)
+static void	get_info(t_dir *dir, t_dir *new)
 {
 	int temp;
 
-	dir->total = dir->total + new->stat.st_blocks;
-	dir->maxlk = (dir->maxlk <= new->stat.st_nlink) ? new->stat.st_nlink : dir->maxlk;
-	if (S_ISBLK(new->stat.st_mode) || S_ISCHR(new->stat.st_mode))
+	dir->total = dir->total + new->stat->st_blocks;
+	dir->maxlk = (dir->maxlk <= new->stat->st_nlink) ? new->stat->st_nlink : dir->maxlk;
+	if (S_ISBLK(new->stat->st_mode) || S_ISCHR(new->stat->st_mode))
 	{
-		temp = major(new->stat.st_rdev);
-		dir->maxmin = dir->maxmin <= temp) ? temp : dir->maxmin;
-		temp = minor(new->stat.st_rdev);
+		temp = major(new->stat->st_rdev);
+		dir->maxmin = (dir->maxmin <= temp) ? temp : dir->maxmin;
+		temp = minor(new->stat->st_rdev);
 		dir->maxfsz = (dir->maxfsz <= temp) ? temp : dir->maxfsz;
 	}
 	else
-		dir->maxfsz = (dir->maxfsz <= new->stat.st_size) ? new->stat.st_size : dir->maxfsz;
+		dir->maxfsz = (dir->maxfsz <= new->stat->st_size) ? new->stat->st_size : dir->maxfsz;
 	if (new->pswd)
 	{
 		if ((int)ft_strlen(new->pswd->pw_name) > dir->maxown)
@@ -49,17 +49,17 @@ t_dir	*add_file(char *avi, t_opt *opt, t_dir *dir, struct stat *stat)
 		new->stat = ft_stat_dup(stat, sizeof(struct stat));
 	if (opt->l || opt->n || opt->o)
 	{
-		new->pswd = getpwuid(stat.st_uid);
-		new->grp = getgrgid(stat.st_gid);
+		new->pswd = getpwuid(stat->st_uid);
+		new->grp = getgrgid(stat->st_gid);
 	}
 	r = (opt->r == 1) ? 1 : 0;
 	if (opt->t)
 		dir->files = sort_t(new, dir->files, r);
 	else
-		dir->files = sort_a(new, dir->files, r));
+		dir->files = sort_a(new, dir->files, r);
 	if (opt->l || opt->n || opt->o)
-		dir = get_info(dir, opt, new);
-	return (files->files);
+		get_info(dir, new);
+	return (dir->files);
 }
 
 static t_dir	*add_f_err(t_dir *dir, char *path_name, char *dname, t_opt *opt)
@@ -72,7 +72,7 @@ static t_dir	*add_f_err(t_dir *dir, char *path_name, char *dname, t_opt *opt)
 	new = NULL;
 	lstat(path_name, &stat);
 	new = init_dir(dname, path_name);
-	new->buf = ft_stat_dup(&stat, sizeof(struct stat));
+	new->stat = ft_stat_dup(&stat, sizeof(struct stat));
 	new->name = ft_strdup(path_name);
 	tmp = can_be_opened(path_name);
 	new->strerr = ft_strjoin("ls: ", dname);
@@ -80,7 +80,7 @@ static t_dir	*add_f_err(t_dir *dir, char *path_name, char *dname, t_opt *opt)
 	new->strerr = ft_strjoin_free(new->strerr, tmp);
 	if (!(dir))
 		return (new);
-	new->display_total = (opt->l) ? 1 : 0;
+	new->disp_total = (opt->l) ? 1 : 0;
 	r = (opt->r == 1) ? 1 : 0;
 	if (opt->t == 1)
 		return (sort_t(new, dir, r));
@@ -110,10 +110,10 @@ static void	while_dir(t_dir *new, struct dirent *read_file, t_opt *opt)
 				new->sdir = add_dir(path_name, opt, new->sdir, &stat);
 			else
 				new->sdir = add_f_err(new->sdir, path_name, read_file->d_name, opt);
-			ft_free(strerr, NULL);
+			ft_free((void **)&strerr, NULL, NULL, NULL);
 		}
 	}
-	ft_free(path_name, NULL);
+	ft_free((void **)&path_name, NULL, NULL, NULL);
 }
 
 t_dir	*add_dir(char *avi, t_opt *opt, t_dir *dir, struct stat *stat)
@@ -133,7 +133,7 @@ t_dir	*add_dir(char *avi, t_opt *opt, t_dir *dir, struct stat *stat)
 		while_dir(new, read_file, opt);
 	if (ptr)
 		closedir(ptr);
-	new->display_total = (opt->l) ? 1 : 0;
+	new->disp_total = (opt->l) ? 1 : 0;
 	r = (opt->r == 1) ? 1 : 0;
 	if (opt->t == 1)
 		return (sort_t(new, dir, r));
