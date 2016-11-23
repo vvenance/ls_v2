@@ -86,8 +86,15 @@ t_dir	*reverse_sort_t(t_dir *tmp, t_dir *f);
 t_dir	*sort_t(t_dir *tmp, t_dir *f, int r);
 t_dir	*reverse_sort_a(t_dir *tmp, t_dir *f);
 t_dir	*sort_a(t_dir *tmp, t_dir *f, int r);
-
-
-
+void	print_error(t_base *base);
+void	display(t_base *base, t_opt* opt);
+void	print_type(t_dir *files);
+void	print_perm(t_dir *file);
+void	print_extended(t_dir *dir, t_dir *files);
+void	print_links(t_dir *files, t_dir *dir);
+void	print_own(t_dir *files, t_dir *dir, t_opt *opt);
+void	print_size(t_dir *files, t_dir *dir, int i, int j);
+void	print_sym_link(t_dir *files, t_dir *dir, char *buf);
+void	print_date(t_dir *files, int j);
 
 #endif

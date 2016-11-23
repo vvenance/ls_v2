@@ -23,8 +23,11 @@ int	main(int ac, char **av)
 		return (0);
 	fts_open(ac, av);
 	base = get_args(opt, av, ac, base);
-	ft_free((void **)&opt, (void **)&base, NULL, NULL);
+	if (base->error)
+		print_error(base);
+	display(base, opt);
+	//ft_free((void **)&opt, (void **)&base, NULL, NULL);
 	if (!opt)
 		printf("c'est gagne\n");
-	return (0);
+	return (1);
 }
