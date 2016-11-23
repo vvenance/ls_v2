@@ -78,6 +78,7 @@ static void print_files(t_dir *dir, t_opt *opt)
 			ft_putstr("\n");
 		//ft_free(prev->name, prev->stat, prev, NULL);
 	}
+	ft_putstr("\n");
 }
 
 static void	display_dir(t_dir *dir, t_opt *opt)
@@ -100,6 +101,8 @@ static void	display_dir(t_dir *dir, t_opt *opt)
 		}
 		prev = dir;
 		dir = dir->next;
+		if (dir)
+			ft_putstr("\n");
 		//ft_free(prev->stat, prev->name, prev->path_name, prev);
 	}
 }

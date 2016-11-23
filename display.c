@@ -95,7 +95,8 @@ void		print_extended(t_dir *dir, t_dir *files)
 	acl_t	acl;
 	int		ret;
 
-	str = ft_strjoin(dir->name, files->name);
+	str = ft_strjoin(dir->name, "/");
+	str = ft_strjoin_free(str, files->name);
 	acl = acl_get_file(str, ACL_TYPE_EXTENDED);
 	ret = listxattr(str, NULL, 0, XATTR_NOFOLLOW);
 	if (ret > 0)
