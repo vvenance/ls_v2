@@ -67,11 +67,11 @@ static void print_files(t_dir *dir, t_opt *opt)
 			print_extended(dir, dir->files);
 			print_links(dir->files, dir);
 			print_own(dir->files, dir, opt);
-			print_size(dir, dir->files, 0, 0);
+			print_size(dir->files, dir, 0, 0);
 		}
 		ft_putstr(dir->files->name);
 		if (opt->l)
-			print_sym_link(dir, dir->files, ft_memalloc(200));
+			print_sym_link(dir->files, dir, ft_memalloc(200));
 		prev = dir->files;
 		dir->files = dir->files->next;
 		if (dir->files)

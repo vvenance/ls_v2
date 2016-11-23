@@ -78,30 +78,27 @@ static void	print_min(t_dir *files, t_dir *dir, int i, int j)
 
 static void	print_regular_size(t_dir *files, t_dir *dir, int i, int j)
 {
-	//int tmp;
+	int tmp;
 
-	// if (dir->maxmin)
-	// {
-	// 	tmp = dir->maxmin;
-	// 	while (tmp > 9)
-	// 	{
-	// 		ft_putchar(' ');
-	// 		tmp = tmp / 10;
-	// 	}
-	// 	ft_putstr("   ");
-	// }
-	// tmp = dir->maxfsz;
-	// while (tmp > 9 && ++i)
-	// 	tmp = tmp / 10;
-	// tmp = files->stat->st_size;
-	// while (tmp > 9 && ++j)
-	// 	tmp = tmp / 10;
-	// i += 1;
-	// while (j != --i)
-	// 	ft_putchar(' ');
-	(void)dir;
-	(void)i;
-	(void)j;
+	if (dir->maxmin)
+	{
+		tmp = dir->maxmin;
+		while (tmp > 9)
+		{
+			ft_putchar(' ');
+			tmp = tmp / 10;
+		}
+		ft_putstr("   ");
+	}
+	tmp = dir->maxfsz;
+	while (tmp > 9 && ++i)
+		tmp = tmp / 10;
+	tmp = files->stat->st_size;
+	while (tmp > 9 && ++j)
+		tmp = tmp / 10;
+	i += 1;
+	while (j != --i)
+		ft_putchar(' ');
 	ft_putnbr(files->stat->st_size);
 }
 
