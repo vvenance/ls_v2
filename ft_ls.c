@@ -19,13 +19,19 @@ int	main(int ac, char **av)
 
 	opt = init_opt();
 	base = init_base();
+	//printf("c'est\n");
 	if (!(opt = get_opt(opt, av, ac, 1)))
 		return (0);
+	//printf("pas\n");
 	fts_open(ac, av);
+	//printf("gagne\n");
 	base = get_args(opt, av, ac, base);
+	//printf("hein\n");
 	if (base->error)
 		print_error(base);
+	//printf("dora\n");
 	display(base, opt);
+	//printf("babouche\n");
 	//ft_free((void **)&opt, (void **)&base, NULL, NULL);
 	if (!opt)
 		printf("c'est gagne\n");

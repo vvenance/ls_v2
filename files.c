@@ -39,29 +39,6 @@ static void	get_info(t_dir *dir, t_dir *new)
 	}
 }
 
-t_dir	*add_file(char *avi, t_opt *opt, t_dir *dir, struct stat *stat)
-{
-	t_dir	*new;
-	int		r;
-
-	new = init_dir(avi, NULL);
-	if (opt->l || opt->t || opt->n || opt->o)
-		new->stat = ft_stat_dup(stat, sizeof(struct stat));
-	if (opt->l || opt->n || opt->o)
-	{
-		new->pswd = getpwuid(stat->st_uid);
-		new->grp = getgrgid(stat->st_gid);
-	}
-	r = (opt->r == 1) ? 1 : 0;
-	if (opt->t)
-		dir->files = sort_t(new, dir->files, r);
-	else
-		dir->files = sort_a(new, dir->files, r);
-	if (opt->l || opt->n || opt->o)
-		get_info(dir, new);
-	return (dir->files);
-}
-
 static t_dir	*add_f_err(t_dir *dir, char *path_name, char *dname, t_opt *opt)
 {
 	t_dir		*new;
@@ -138,4 +115,27 @@ t_dir	*add_dir(char *avi, t_opt *opt, t_dir *dir, struct stat *stat)
 	if (opt->t == 1)
 		return (sort_t(new, dir, r));
 	return (sort_a(new, dir, r));
+}
+
+t_dir	*add_file(char *avi, t_opt *opt, t_dir *dir, struct stat *stat)
+{
+	t_dir	*new;
+	int		r;
+
+	new = init_dir(avi, NULL);
+	if (opt->l || opt->t || opt->n || opt->o)
+		new->stat = ft_stat_dup(stat, sizeof(struct stat));
+	if (opt->l || opt->n || opt->o)
+	{
+		new->pswd = getpwuid(stat->st_uid);
+		new->grp = getgrgid(stat->st_gid);
+	}
+	if (opt->l || opt->n || opt->o)
+		get_info(dir, new);
+	r = (opt->r == 1) ? 1 : 0;
+	if (opt->t)
+		dir->files = sort_t(new, dir->files, r);
+	else
+		dir->files = sort_a(new, dir->files, r);
+	return (dir->files);
 }

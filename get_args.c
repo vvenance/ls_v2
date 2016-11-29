@@ -46,7 +46,10 @@ static t_base	*get_args2(t_opt *opt, char *avi, t_base *base)
 		else if (S_ISREG(statt.st_mode) || S_ISCHR(statt.st_mode) ||
 			S_ISBLK(statt.st_mode) || S_ISFIFO(statt.st_mode) ||
 			S_ISLNK(statt.st_mode) || S_ISSOCK(statt.st_mode))
+		{
+			base->solo_files = init_dir("solo", NULL);
 			base->solo_files->files = add_file(avi, opt, base->solo_files, &statt);
+		}
 		else
 			base = ft_add_err(base, avi, strerr);
 	}
@@ -63,7 +66,7 @@ t_base		*get_args(t_opt *opt, char **av, int ac, t_base *base)
 		if (base->dir)
 			base->dir->disp_name = 0;
 	}
-	if (opt->index + 1 == ac)
+	else if (opt->index + 1 == ac)
 	{
 		base = get_args2(opt, av[opt->index], base);
 		if (base->dir)
