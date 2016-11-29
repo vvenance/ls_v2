@@ -47,7 +47,8 @@ static t_base	*get_args2(t_opt *opt, char *avi, t_base *base)
 			S_ISBLK(statt.st_mode) || S_ISFIFO(statt.st_mode) ||
 			S_ISLNK(statt.st_mode) || S_ISSOCK(statt.st_mode))
 		{
-			base->solo_files = init_dir("solo", NULL);
+			if (!base->solo_files)
+				base->solo_files = init_dir("solo", NULL);
 			base->solo_files->files = add_file(avi, opt, base->solo_files, &statt);
 		}
 		else
