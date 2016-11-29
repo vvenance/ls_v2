@@ -74,7 +74,7 @@ static void print_files(t_dir *dir, t_opt *opt)
 		dir->files = dir->files->next;
 		if (dir->files)
 			ft_putstr("\n");
-		//ft_free(prev->name, prev->stat, prev, NULL);
+		ft_free(4, &prev->name, &prev->stat, &prev->path_name, &prev);
 	}
 	ft_putstr("\n");
 }
@@ -91,7 +91,7 @@ static void	display_dir(t_dir *dir, t_opt *opt)
 			print_files(dir, opt);
 		else if (dir->strerr)
 			ft_putendl(dir->strerr);
-		//ft_free(dir->strerr, NULL, NULL, NULL);
+		ft_free(1, &dir->strerr);
 		if (dir->sdir)
 		{
 			ft_putstr("\n");
@@ -99,16 +99,14 @@ static void	display_dir(t_dir *dir, t_opt *opt)
 		}
 		prev = dir;
 		dir = dir->next;
+		ft_free(4, &prev->stat, &prev->name, &prev->path_name, &prev);
 		if (dir)
 			ft_putstr("\n");
-		//ft_free(prev->stat, prev->name, prev->path_name, prev);
 	}
 }
 
 void	display(t_base *base, t_opt* opt)
 {
-	//t_dir *prev;
-
 	if (base->solo_files)
 	{
 		print_files(base->solo_files, opt);

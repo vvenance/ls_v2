@@ -27,7 +27,5 @@ int	main(int ac, char **av)
 		print_error(base);
 	display(base, opt);
 	ft_free(2, &opt, &base);
-	// if (!opt)
-	// 	printf("c'est gagne\n");
 	return (1);
 }
