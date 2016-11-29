@@ -17,15 +17,15 @@ static void	free_date(char *str, char **tab, int i)
 	char *tmp;
 
 	(void)str;
-	//ft_free(str, NULL);
+	ft_free( 1, &str);
 	while (tab[i])
 	{
 		tmp = tab[i - 1];
-		//ft_free(tmp, NULL);
+		ft_free(1, &tmp);
 		i++;
 	}
-	//ft_free(tab[i - 1], tab[i]);
-	//ft_free(tab, NULL);
+	ft_free(2, &tab[i - 1], &tab[i]);
+	ft_free(1, &tab);
 }
 
 void		print_date(t_dir *files, int j)
@@ -69,7 +69,7 @@ void	print_sym_link(t_dir *files, t_dir *dir, char *buf)
 			ft_putstr(" -> ");
 			ft_putstr(buf);
 		}
-		//ft_free(str, str2);
+		ft_free(2, &str, &str2);
 	}
-	//ft_free(buf, NULL);
+	ft_free(1, &buf);
 }

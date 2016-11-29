@@ -87,10 +87,10 @@ static void	while_dir(t_dir *new, struct dirent *read_file, t_opt *opt)
 				new->sdir = add_dir(path_name, opt, new->sdir, &stat);
 			else
 				new->sdir = add_f_err(new->sdir, path_name, read_file->d_name, opt);
-			ft_free((void **)&strerr, NULL, NULL, NULL);
+			ft_free(1, &strerr);
 		}
 	}
-	ft_free((void **)&path_name, NULL, NULL, NULL);
+	ft_free(1, &path_name);
 }
 
 t_dir	*add_dir(char *avi, t_opt *opt, t_dir *dir, struct stat *stat)

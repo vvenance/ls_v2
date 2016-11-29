@@ -31,11 +31,9 @@ void	print_error(t_base *base)
 			ft_putendl_fd(base->error->strerr, 2);
 		prev = base->error;
 		base->error = base->error->next;
-		//ft_free((void **)prev->name, (void **)prev->strerr, (void **)prev, NULL);
+		ft_free(3, &prev->name, &prev->strerr, &prev);
 	}
-	//ft_free((void **)base->error, NULL, NULL, NULL);
-	if (base->solo_files || base->dir)
-		ft_putstr("\n");
+	ft_free(1, &base->error);
 }
 
 static void	display_name_and_total(t_dir *dir, t_opt *opt)

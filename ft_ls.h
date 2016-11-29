@@ -75,14 +75,14 @@ t_dir	*init_dir(char *name, char *path_name);
 t_base	*init_base(void);
 t_opt	*get_opt(t_opt *opt, char **av, int ac, int i);
 void	fts_open(int argc, char **argv);
-//void	ft_free(int nb, ...);
-void	ft_free(void **p1, void **p2, void **p3, void **p4);
+void	ft_free(int nb, ...);
+//void	ft_free(void **p1, void **p2, void **p3, void **p4);
 t_base	*get_args(t_opt *opt, char **av, int ac, t_base *base);
 void	*ft_stat_dup(void *s, size_t size);
 char	*can_be_opened(char *name);
 t_dir	*add_dir(char *avi, t_opt *opt, t_dir *dir, struct stat *stat);
 t_dir	*add_file(char *avi, t_opt *opt, t_dir *dir, struct stat *stat);
-t_dir	*reverse_sort_t(t_dir *tmp, t_dir *f);
+//t_dir	*reverse_sort_t(t_dir *tmp, t_dir *f);
 t_dir	*sort_t(t_dir *tmp, t_dir *f, int r);
 t_dir	*reverse_sort_a(t_dir *tmp, t_dir *f);
 t_dir	*sort_a(t_dir *tmp, t_dir *f, int r);
@@ -96,5 +96,8 @@ void	print_own(t_dir *files, t_dir *dir, t_opt *opt);
 void	print_size(t_dir *files, t_dir *dir, int i, int j);
 void	print_sym_link(t_dir *files, t_dir *dir, char *buf);
 void	print_date(t_dir *files, int j);
+
+
+t_dir	*reverse_sort_t(t_dir *tmp, t_dir *f);
 
 #endif

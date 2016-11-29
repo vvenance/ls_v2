@@ -108,6 +108,6 @@ void		print_extended(t_dir *dir, t_dir *files)
 	}
 	else
 		ft_putchar(' ');
-	//ft_free(str, NULL);
+	ft_free(1, &str);
 	ft_putchar(' ');
 }

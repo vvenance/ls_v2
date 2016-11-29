@@ -14,8 +14,9 @@
 
 static t_base	*ft_add_err(t_base *base, char *avi, char *strerr)
 {
-	t_dir	*error;
-	t_dir	*tmp;
+	t_dir *curr;
+	t_dir *prev;
+	t_dir *error;
 
 	error = init_dir(avi, NULL);
 	if (strerr)
@@ -24,10 +25,18 @@ static t_base	*ft_add_err(t_base *base, char *avi, char *strerr)
 		base->error = error;
 	else
 	{
-		tmp = base->error;
-		while(tmp->next)
-			tmp = tmp->next;
-		tmp->next = error;
+		prev = NULL;
+		curr = base->error;
+		while (curr != NULL && (ft_strcmp(avi, curr->name) > 0))
+		{
+			prev = curr;
+			curr = curr->next;
+		}
+		if (prev == NULL)
+			base->error = error;
+		else
+			prev->next = error;
+		error->next = curr;
 	}
 	return (base);
 }

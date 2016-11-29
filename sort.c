@@ -12,11 +12,13 @@
 
 #include "ft_ls.h"
 
-t_dir	*reverse_sort_t(t_dir *tmp, t_dir *f)
+t_dir	*sort_t(t_dir *tmp, t_dir *f, int r)
 {
 	t_dir *curr;
 	t_dir *prev;
 
+	if (r == 1)
+		return (reverse_sort_t(tmp, f));
 	curr = f;
 	prev = NULL;
 	while (curr != NULL && (curr->stat->SEC > tmp->stat->SEC))
@@ -25,7 +27,8 @@ t_dir	*reverse_sort_t(t_dir *tmp, t_dir *f)
 		curr = curr->next;
 	}
 	while (curr != NULL && (curr->stat->SEC == tmp->stat->SEC) &&
-		curr->stat->NSEC >= tmp->stat->NSEC)
+		curr->stat->NSEC >= tmp->stat->NSEC &&
+		(ft_strcmp(tmp->name, curr->name) > 0))
 	{
 		prev = curr;
 		curr = curr->next;
@@ -38,13 +41,11 @@ t_dir	*reverse_sort_t(t_dir *tmp, t_dir *f)
 	return (f);
 }
 
-t_dir	*sort_t(t_dir *tmp, t_dir *f, int r)
+t_dir	*reverse_sort_t(t_dir *tmp, t_dir *f)
 {
 	t_dir *curr;
 	t_dir *prev;
 
-	if (r == 1)
-		return (reverse_sort_t(tmp, f));
 	curr = f;
 	prev = NULL;
 	while (curr != NULL && (curr->stat->SEC < tmp->stat->SEC))
@@ -53,7 +54,8 @@ t_dir	*sort_t(t_dir *tmp, t_dir *f, int r)
 		curr = curr->next;
 	}
 	while (curr != NULL && (curr->stat->SEC == tmp->stat->SEC) &&
-		curr->stat->NSEC <= tmp->stat->NSEC)
+		curr->stat->NSEC <= tmp->stat->NSEC &&
+		(ft_strcmp(tmp->name, curr->name) < 0))
 	{
 		prev = curr;
 		curr = curr->next;
