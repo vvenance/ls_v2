@@ -12,12 +12,12 @@
 
 #include "ft_ls.h"
 
-void	print_error(t_base *base)
+void		print_error(t_base *base)
 {
 	t_dir *prev;
 
 	prev = NULL;
-	while(base->error)
+	while (base->error)
 	{
 		ft_putstr_fd("ls: ", 2);
 		if (base->error->name && ft_strcmp(base->error->name, "\0"))
@@ -51,12 +51,12 @@ static void	display_name_and_total(t_dir *dir, t_opt *opt)
 	}
 }
 
-static void print_files(t_dir *dir, t_opt *opt)
+static void	print_files(t_dir *dir, t_opt *opt)
 {
 	t_dir *prev;
 
 	prev = NULL;
-	while(dir->files)
+	while (dir->files)
 	{
 		if (opt->l)
 		{
@@ -105,7 +105,7 @@ static void	display_dir(t_dir *dir, t_opt *opt)
 	}
 }
 
-void	display(t_base *base, t_opt* opt)
+void		display(t_base *base, t_opt *opt)
 {
 	if (base->solo_files)
 	{

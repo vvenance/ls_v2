@@ -29,8 +29,11 @@
 # include "./libft/inc/libft.h"
 # define NSEC st_mtimespec.tv_nsec
 # define SEC st_mtimespec.tv_sec
+# define N new->sdir
+# define NS new->stat
+# define RF read_file->d_name
 
-typedef struct	s_opt
+typedef struct		s_opt
 {
 	int			l;
 	int			br;
@@ -40,7 +43,7 @@ typedef struct	s_opt
 	int			n;
 	int			o;
 	int			index;
-}				t_opt;
+}					t_opt;
 
 typedef struct		s_dir
 {
@@ -63,41 +66,39 @@ typedef struct		s_dir
 	struct s_dir	*next;
 }					t_dir;
 
-typedef struct s_base
+typedef struct		s_base
 {
 	t_dir		*error;
 	t_dir		*solo_files;
 	t_dir		*dir;
-}				t_base;
+}					t_base;
 
-t_opt	*init_opt(void);
-t_dir	*init_dir(char *name, char *path_name);
-t_base	*init_base(void);
-t_opt	*get_opt(t_opt *opt, char **av, int ac, int i);
-void	fts_open(int argc, char **argv);
-void	ft_free(int nb, ...);
-//void	ft_free(void **p1, void **p2, void **p3, void **p4);
-t_base	*get_args(t_opt *opt, char **av, int ac, t_base *base);
-void	*ft_stat_dup(void *s, size_t size);
-char	*can_be_opened(char *name);
-t_dir	*add_dir(char *avi, t_opt *opt, t_dir *dir, struct stat *stat);
-t_dir	*add_file(char *avi, t_opt *opt, t_dir *dir, struct stat *stat);
-//t_dir	*reverse_sort_t(t_dir *tmp, t_dir *f);
-t_dir	*sort_t(t_dir *tmp, t_dir *f, int r);
-t_dir	*reverse_sort_a(t_dir *tmp, t_dir *f);
-t_dir	*sort_a(t_dir *tmp, t_dir *f, int r);
-void	print_error(t_base *base);
-void	display(t_base *base, t_opt* opt);
-void	print_type(t_dir *files);
-void	print_perm(t_dir *file);
-void	print_extended(t_dir *dir, t_dir *files);
-void	print_links(t_dir *files, t_dir *dir);
-void	print_own(t_dir *files, t_dir *dir, t_opt *opt);
-void	print_size(t_dir *files, t_dir *dir, int i, int j);
-void	print_sym_link(t_dir *files, t_dir *dir, char *buf);
-void	print_date(t_dir *files, int j);
-
-
-t_dir	*reverse_sort_t(t_dir *tmp, t_dir *f);
+t_opt				*init_opt(void);
+t_dir				*init_dir(char *name, char *path_name);
+t_base				*init_base(void);
+t_opt				*get_opt(t_opt *opt, char **av, int ac, int i);
+void				fts_open(int argc, char **argv);
+void				ft_free(int nb, ...);
+t_base				*get_args(t_opt *opt, char **av, int ac, t_base *base);
+void				*ft_stat_dup(void *s, size_t size);
+char				*can_be_opened(char *name);
+t_dir				*add_dir(char *avi, t_opt *opt, t_dir *dir,
+					struct stat *stat);
+t_dir				*add_file(char *avi, t_opt *opt, t_dir *dir,
+					struct stat *stat);
+t_dir				*sort_t(t_dir *tmp, t_dir *f, int r);
+t_dir				*reverse_sort_a(t_dir *tmp, t_dir *f);
+t_dir				*sort_a(t_dir *tmp, t_dir *f, int r);
+void				print_error(t_base *base);
+void				display(t_base *base, t_opt *opt);
+void				print_type(t_dir *files);
+void				print_perm(t_dir *file);
+void				print_extended(t_dir *dir, t_dir *files);
+void				print_links(t_dir *files, t_dir *dir);
+void				print_own(t_dir *files, t_dir *dir, t_opt *opt);
+void				print_size(t_dir *files, t_dir *dir, int i, int j);
+void				print_sym_link(t_dir *files, t_dir *dir, char *buf);
+void				print_date(t_dir *files, int j);
+t_dir				*reverse_sort_t(t_dir *tmp, t_dir *f);
 
 #endif

@@ -12,12 +12,12 @@
 
 #include "ft_ls.h"
 
-static void	get_info(t_dir *dir, t_dir *new)
+static void		get_info(t_dir *dir, t_dir *new)
 {
 	int temp;
 
 	dir->total = dir->total + new->stat->st_blocks;
-	dir->maxlk = (dir->maxlk <= new->stat->st_nlink) ? new->stat->st_nlink : dir->maxlk;
+	dir->maxlk = (dir->maxlk <= NS->st_nlink) ? NS->st_nlink : dir->maxlk;
 	if (S_ISBLK(new->stat->st_mode) || S_ISCHR(new->stat->st_mode))
 	{
 		temp = major(new->stat->st_rdev);
@@ -26,7 +26,7 @@ static void	get_info(t_dir *dir, t_dir *new)
 		dir->maxfsz = (dir->maxfsz <= temp) ? temp : dir->maxfsz;
 	}
 	else
-		dir->maxfsz = (dir->maxfsz <= new->stat->st_size) ? new->stat->st_size : dir->maxfsz;
+		dir->maxfsz = (dir->maxfsz <= NS->st_size) ? NS->st_size : dir->maxfsz;
 	if (new->pswd)
 	{
 		if ((int)ft_strlen(new->pswd->pw_name) > dir->maxown)
@@ -64,7 +64,7 @@ static t_dir	*add_f_err(t_dir *dir, char *path_name, char *dname, t_opt *opt)
 	return (sort_a(new, dir, r));
 }
 
-static void	while_dir(t_dir *new, struct dirent *read_file, t_opt *opt)
+static void		while_dir(t_dir *new, struct dirent *read_file, t_opt *opt)
 {
 	char		*path_name;
 	struct stat	stat;
@@ -72,28 +72,28 @@ static void	while_dir(t_dir *new, struct dirent *read_file, t_opt *opt)
 
 	path_name = ft_strjoin(new->name, "/");
 	path_name = ft_strjoin_free(path_name, read_file->d_name);
-	new->path_name = ft_strdup(path_name);
+	new->path_name = (!new->path_name) ? ft_strdup(path_name) : new->path_name;
 	lstat(path_name, &stat);
 	if (opt->a == 0 && read_file->d_name[0] == '.')
 		;
 	else
 	{
 		new->files = add_file(read_file->d_name, opt, new, &stat);
-		if (S_ISDIR(stat.st_mode) && opt->br == 1 && (ft_strcmp(read_file->d_name, "."))
+		if (S_ISDIR(stat.st_mode) && opt->br == 1 && (ft_strcmp(RF, "."))
 			&& (ft_strcmp(read_file->d_name, "..")))
 		{
 			strerr = NULL;
 			if (!(strerr = can_be_opened(path_name)))
 				new->sdir = add_dir(path_name, opt, new->sdir, &stat);
 			else
-				new->sdir = add_f_err(new->sdir, path_name, read_file->d_name, opt);
+				N = add_f_err(new->sdir, path_name, read_file->d_name, opt);
 			ft_free(1, &strerr);
 		}
 	}
 	ft_free(1, &path_name);
 }
 
-t_dir	*add_dir(char *avi, t_opt *opt, t_dir *dir, struct stat *stat)
+t_dir			*add_dir(char *avi, t_opt *opt, t_dir *dir, struct stat *stat)
 {
 	t_dir			*new;
 	DIR				*ptr;
@@ -117,7 +117,7 @@ t_dir	*add_dir(char *avi, t_opt *opt, t_dir *dir, struct stat *stat)
 	return (sort_a(new, dir, r));
 }
 
-t_dir	*add_file(char *avi, t_opt *opt, t_dir *dir, struct stat *stat)
+t_dir			*add_file(char *avi, t_opt *opt, t_dir *dir, struct stat *stat)
 {
 	t_dir	*new;
 	int		r;

@@ -6,7 +6,7 @@
 /*   By: vvenance <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 13:23:06 by vvenance          #+#    #+#             */
-/*   Updated: 2016/11/23 13:23:08 by vvenance         ###   ########.fr       */
+/*   Updated: 2016/11/29 22:49:31 by vvenance         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		print_links(t_dir *files, t_dir *dir)
 	ft_putchar(' ');
 }
 
-void	print_own(t_dir *files, t_dir *dir, t_opt *opt)
+void		print_own(t_dir *files, t_dir *dir, t_opt *opt)
 {
 	int dif;
 
@@ -102,7 +102,7 @@ static void	print_regular_size(t_dir *files, t_dir *dir, int i, int j)
 	ft_putnbr(files->stat->st_size);
 }
 
-void	print_size(t_dir *files, t_dir *dir, int i, int j)
+void		print_size(t_dir *files, t_dir *dir, int i, int j)
 {
 	int min;
 	int ctrl;

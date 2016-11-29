@@ -17,7 +17,7 @@ static void	free_date(char *str, char **tab, int i)
 	char *tmp;
 
 	(void)str;
-	ft_free( 1, &str);
+	ft_free(1, &str);
 	while (tab[i])
 	{
 		tmp = tab[i - 1];
@@ -55,7 +55,7 @@ void		print_date(t_dir *files, int j)
 	ft_putchar(' ');
 }
 
-void	print_sym_link(t_dir *files, t_dir *dir, char *buf)
+void		print_sym_link(t_dir *files, t_dir *dir, char *buf)
 {
 	char *str;
 	char *str2;

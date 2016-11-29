@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void	print_type(t_dir *files)
+void		print_type(t_dir *files)
 {
 	if (S_ISBLK(files->stat->st_mode))
 		ft_putchar('b');
@@ -69,7 +69,7 @@ static void	print_p_group(t_dir *file)
 	print_p_other(file);
 }
 
-void	print_perm(t_dir *file)
+void		print_perm(t_dir *file)
 {
 	char c;
 

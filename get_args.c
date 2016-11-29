@@ -58,7 +58,8 @@ static t_base	*get_args2(t_opt *opt, char *avi, t_base *base)
 		{
 			if (!base->solo_files)
 				base->solo_files = init_dir("solo", NULL);
-			base->solo_files->files = add_file(avi, opt, base->solo_files, &statt);
+			base->solo_files->files =
+			add_file(avi, opt, base->solo_files, &statt);
 		}
 		else
 			base = ft_add_err(base, avi, strerr);
@@ -68,7 +69,7 @@ static t_base	*get_args2(t_opt *opt, char *avi, t_base *base)
 	return (base);
 }
 
-t_base		*get_args(t_opt *opt, char **av, int ac, t_base *base)
+t_base			*get_args(t_opt *opt, char **av, int ac, t_base *base)
 {
 	if (ac == opt->index && av)
 	{

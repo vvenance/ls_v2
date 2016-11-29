@@ -41,7 +41,7 @@ static int	get_o(char *str, t_opt *opt, int i)
 	return (0);
 }
 
-t_opt	*get_opt(t_opt *opt, char **av, int ac, int i)
+t_opt		*get_opt(t_opt *opt, char **av, int ac, int i)
 {
 	while (i != ac && av[i][0] == '-')
 	{

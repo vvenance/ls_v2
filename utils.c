@@ -56,31 +56,15 @@ void	*ft_stat_dup(void *s, size_t size)
 	return (tmp);
 }
 
-// void	ft_free(void **p1, void **p2, void **p3, void **p4)
-// {
-// 	if (*p1)
-// 		free(*p1);
-// 	*p1 = NULL;
-// 	if (*p2)
-// 		free(*p2);
-// 	*p2 = NULL;
-// 	if (*p3)
-// 		free(*p3);
-// 	*p3 = NULL;
-// 	if (*p4)
-// 		free(*p4);
-// 	*p4 = NULL;
-// }
-
 void	ft_free(int nb, ...)
 {
 	va_list	ap;
 	void	**tmp;
 
 	va_start(ap, nb);
-	while(nb--)
+	while (nb--)
 	{
-		if((tmp = va_arg(ap, void **)))
+		if ((tmp = va_arg(ap, void **)))
 		{
 			free(*tmp);
 			*tmp = NULL;
